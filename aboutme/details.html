@@ -3,8 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>About Me</title>
-    <link rel="stylesheet" type="text/css" href="../stylesheets/object_ning.css">
-    <link rel="stylesheet" type="text/css" href="../stylesheets/details.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/aboutme.css">
 </head>
 <body>
 <div id="container">
@@ -66,7 +65,13 @@
 </div>
 </body>
 <script type="text/javascript">
-    //    onload = init;
+    onload = repaint;
+    function repaint() {
+        var width = window.screen.width;
+        if (width > 1280) {
+            document.querySelector("#container").style.width = "1280px";
+        }
+    }
     function init() {
         var id = window.id;
         var surface = window.surface;
