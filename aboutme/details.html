@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Object-Ning Details</title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/object_ning.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/details.css">
+</head>
+<body>
+<div id="container">
+    <div class="container" id="photos">
+        <div id="image" class="image" style="background-image: url('../images/details_bg.jpg')">
+            <div class="pagination">
+                <div onclick="showPhotos(true)">&gt;</div>
+                <div onclick="showPhotos(false)">&lt;</div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="statement">
+        <h3>简介</h3>
+
+        <p>
+            中文名：<strong>艾彦波</strong>；英文名：<strong>Andy Ai</strong>。当你在我的开源软件上发现Andy Ai的署名时，
+            那就说明那代码时我写下的！曾经有一段时间用过Ian作为我的英文名，至于为什么？没有为什么!
+        </p>
+
+        <p>
+            5年以上软件开发经验，擅长低层技术架构，技术研究，技术推广。对高性能，分布式，高并发有浓厚的兴趣并有设计实现经验与心得。
+            喜欢关注低层技术与编程语言，乐于用Java开发各种各样的系统，最近在学习研究Scala与Clojure。
+            目前在杭州数云信息技术有限公司任高级工程师一职。
+        </p>
+
+        <h3>风格</h3>
+
+        <p>
+            可以说是个怪咖，当认真做一件事时会坚持到底。不推崇经验说！
+        </p>
+
+        <h3>观点</h3>
+        <ul>
+            <li>经验就是瞎扯淡</li>
+
+            <li>技术从来都不是用来学的，而是用来玩的</li>
+
+            <li>对自己的代码不负责的行为就是耍流氓</li>
+        </ul>
+        <h3>联系方式</h3>
+        <ul>
+            <li>SINA: http://weibo.com/aiyboo</li>
+            <li>E-MAIL: yanbo.ai@gmail.com</li>
+            <li>GitHub: https://github.com/aiyanbo</li>
+        </ul>
+    </div>
+    <div class="container" id="basic">
+        <div class="avatar">
+            <img src="http://tp4.sinaimg.cn/1846816475/180/39996289328/1">
+        </div>
+        <div class="profile">
+            <ul>
+                <li>Andy Ai</li>
+                <li>Shanghai China</li>
+                <li class="remarks">做自己喜欢的！</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    //    onload = init;
+    function init() {
+        var id = window.id;
+        var surface = window.surface;
+        if (!id) {
+            id = window.localStorage.getItem("surfaceId");
+        } else {
+            window.localStorage.setItem("surfaceId", id);
+        }
+        if (!surface) {
+            surface = JSON.parse(window.localStorage.getItem("surface"));
+        } else {
+            window.localStorage.setItem("surface", JSON.stringify(surface));
+        }
+        showBasic(surface);
+        showStatement(id);
+        window.photoIndex = 0;
+        window.photoList = [];
+        loadPhotos(id);
+    }
+    function showBasic(surface) {
+        var basic = document.querySelector("#basic");
+        basic.querySelector("div.avatar img").src = surface.avatar;
+        var profiles = basic.querySelectorAll("div.profile ul li");
+        profiles[0].innerHTML = surface.nickname;
+        profiles[1].innerHTML = surface.gender;
+        profiles[2].innerHTML = surface.location ? surface.location : "";
+        profiles[3].innerHTML = surface.remarks ? surface.remarks : "";
+        document.title = document.title + " [" + surface.nickname + "]"
+    }
+    function showStatement(identity) {
+        $.ajax({
+            url: "/objectning-server/rest/box/statement/" + identity,
+            type: "GET",
+            success: function (data) {
+                var statement = document.querySelector("#statement");
+                data = data.replace("\n", "<br>");
+                statement.innerHTML = data;
+            }
+        });
+    }
+    function loadPhotos(identity) {
+        $.ajax({
+            url: "/objectning-server/rest/box/photos/" + identity,
+            type: "GET",
+            success: function (data) {
+                var photoList = eval(data);
+                if (photoList.length > 0) {
+                    window.photoIndex = 0;
+                    document.querySelector("#image").style.backgroundImage = "url(" + photoList[0] + ")";
+                }
+                window.photoList = photoList;
+            }
+        });
+    }
+    function showPhotos(nexted) {
+        var index;
+        if (nexted) {
+            index = window.photoIndex + 1;
+        } else {
+            index = window.photoIndex - 1;
+        }
+        if (index < 0 || index >= window.photoList.length) {
+            return;
+        }
+        window.photoIndex = index;
+        document.querySelector("#image").style.backgroundImage = "url(" + window.photoList[index] + ")";
+    }
+</script>
+</html>
