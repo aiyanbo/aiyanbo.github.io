@@ -1,0 +1,71 @@
+body {
+    background: url("../images/default_bg.png") repeat repeat;
+    font-family: 'Microsoft Yahei', Calibri, Helvetica, Arial, sans-serif;
+}
+
+#main_content {
+    width: 95%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.surface {
+    width: 300px;
+    height: 140px;
+    margin: 5px 5px 5px 2px;
+    cursor: default;
+    color: white;
+    border: 0;
+    padding: 5px;
+    display: inline-block;
+}
+
+.title {
+    font-size: 120%;
+    font-weight: bolder;
+    padding: 2px 0;
+}
+
+.desc {
+    font-size: 80%;
+}
+
+.surface_bg_0 {
+    background-color: #039AAB;
+}
+
+.surface_bg_1 {
+    background-color: #5C489D;
+}
+
+.surface_bg_2 {
+    background-color: #4473B9;
+}
+
+.surface_bg_3 {
+    background-color: #0E9E49;
+}
+
+.surface_bg_4 {
+    background-color: #953193;
+}
+
+.surface_bg_5 {
+    background-color: #305BAA;
+}
+
+.surface_bg_6 {
+    background-color: #D44B29;
+}
+
+.surface_bg_7 {
+    background-color: #D44B29;
+}
+
+.surface_bg_8 {
+    background-color: #963294;
+}
+
+.surface_bg_9 {
+    background-color: #B91C46;
+}
