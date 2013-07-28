@@ -15,9 +15,31 @@
 <!-- HEADER -->
 <header>
     <div id="header_wrapper">
-        <h1>
-            <a href="#!">NinetyH's Blog</a>
-        </h1>
+        <div id="header_center">
+            <div id="header_title">
+                <h1>
+                    <a href="#!">NinetyH's Blog</a>
+                </h1>
+
+                <h2>
+                    做自己喜欢的
+                </h2>
+            </div>
+            <nav>
+                <a class="nav_item_active" href="index.html" onclick="easeIn(this)">
+                    <img src="images/home.png">
+                    Home
+                </a>
+                <a class="nav_item" href="aboutme/details.html" onclick="easeIn(this)">
+                    <img src="images/g.png">
+                    Games
+                </a>
+                <a class="nav_item" href="aboutme/details.html" onclick="easeIn(this)">
+                    <img src="images/questionmark.png">
+                    Support
+                </a>
+            </nav>
+        </div>
     </div>
 </header>
 <!-- MAIN CONTENT -->
@@ -96,6 +118,14 @@
                 window.location = "https://github.com/aiyanbo/sliner/wiki/Dynamic-Index-Generator";
             }
         }
+    }
+    function easeIn(element) {
+        var active = document.querySelector("a.nav_item_active");
+        if (active === element) {
+            return;
+        }
+        active.className = active.className.replace("nav_item_active", "nav_item");
+        element.className = element.className.replace("nav_item", "nav_item_active");
     }
 </script>
 </html>

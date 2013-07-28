@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <meta name="description" content="About Andy Ai"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet2.css">
+
+    <title>About Me</title>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<!--<header>-->
+<!--<div id="header_wrapper">-->
+<!--<div id="header_center">-->
+<!--<div id="header_title">-->
+<!--<h1>-->
+<!--<a href="#!">About Me</a>-->
+<!--</h1>-->
+
+<!--<h2>-->
+<!--做自己喜欢的-->
+<!--</h2>-->
+<!--</div>-->
+<!--<nav>-->
+<!--<a class="nav_item_active" href="../index.html" onclick="easeIn(this)">-->
+<!--<img src="../images/home.png">-->
+<!--Home-->
+<!--</a>-->
+<!--<a class="nav_item" href="details.html" onclick="easeIn(this)">-->
+<!--<img src="../images/g.png">-->
+<!--Games-->
+<!--</a>-->
+<!--<a class="nav_item" href="details.html" onclick="easeIn(this)">-->
+<!--<img src="../images/questionmark.png">-->
+<!--Support-->
+<!--</a>-->
+<!--</nav>-->
+<!--</div>-->
+<!--</div>-->
+<!--</header>-->
+<div style="clear: both"></div>
+<!-- MAIN CONTENT -->
+<div id="main_content">
+    <!--<h3></h3>-->
+
+    <div class="surface" style="height:250px">
+        <div class="title"></div>
+        <div class="desc">
+            <img style="display: block" src="http://tp4.sinaimg.cn/1846816475/180/39996289328/1">
+            <ul>
+                <li>Andy Ai</li>
+                <li>Shanghai China</li>
+            </ul>
+        </div>
+    </div>
+    <div class="surface" style="width:500px;height: 200px">
+        <div class="title">简介</div>
+        <div class="desc">
+            <p>
+                中文名：<strong>艾彦波</strong>；英文名：<strong>Andy Ai</strong>。当你在我的开源软件上发现Andy Ai的署名时，
+                那就说明那代码时我写下的！曾经有一段时间用过Ian作为我的英文名，至于为什么？没有为什么!
+            </p>
+
+            <p>
+                5年以上软件开发经验，擅长低层技术架构，技术研究，技术推广。对高性能，分布式，高并发有浓厚的兴趣并有设计实现经验与心得。
+                喜欢关注低层技术与编程语言，乐于用Java开发各种各样的系统，最近在学习研究Scala与Clojure。
+                目前在杭州数云信息技术有限公司任高级工程师一职。
+            </p>
+        </div>
+    </div>
+    <div class="surface">
+        <div class="title">风格</div>
+        <div class="desc">
+            <!--<p>-->
+            可以说是个怪咖，当认真做一件事时会坚持到底。不推崇经验说！
+            <!--</p>-->
+        </div>
+    </div>
+    <div class="surface">
+        <div class="title">观点</div>
+        <div class="desc">
+            <ul>
+                <li>经验就是瞎扯淡</li>
+
+                <li>技术从来都不是用来学的，而是用来玩的</li>
+
+                <li>对自己的代码不负责的行为就是耍流氓</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- FOOTER  -->
+
+</body>
+<script type="text/javascript">
+    onload = init;
+    function init() {
+        var surfaces = document.querySelectorAll("div.surface");
+        for (var i in surfaces) {
+            if (!surfaces[i].className) {
+                break;
+            }
+            surfaces[i].className = surfaces[i].className + " surface_bg_" + (i % 10);
+        }
+    }
+    function easeIn(element) {
+        var active = document.querySelector("a.nav_item_active");
+        if (active === element) {
+            return;
+        }
+        active.className = active.className.replace("nav_item_active", "nav_item");
+        element.className = element.className.replace("nav_item", "nav_item_active");
+    }
+</script>
+</html>
