@@ -137,6 +137,7 @@ nav>a>img {
     height: 96px;
     display: block;
     margin: 0 auto;
+    border: none;
 }
 
 .surface_content {
