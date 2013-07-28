@@ -114,6 +114,38 @@ nav>a>img {
     border: #ffffff 1px solid;
 }
 
+.surface_transition {
+    width: 130px;
+    text-align: center;
+    -webkit-transition: -webkit-transform 0.6s;
+    transition: transform 0.6s;
+}
+
+.surface_transition:hover {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+}
+
+.surface_icon {
+    width: 130px;
+    line-height: 1;
+    text-align: center;
+}
+
+.surface_icon>img {
+    width: 96px;
+    height: 96px;
+    display: block;
+    margin: 0 auto;
+}
+
+.surface_content {
+    font-size: 120%;
+    display: none;
+    transform: rotateY(-180deg);
+    -webkit-transform: rotateY(-180deg);
+}
+
 .title {
     font-size: 120%;
     font-weight: bolder;
