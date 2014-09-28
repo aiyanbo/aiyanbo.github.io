@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Markdown PPT Mobile Player</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/player.mobile.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.mobile.custom.min.js"></script>
+    <script src="http://jgm.github.io/stmd/js/stmd.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/air.play.js"></script>
+    <script src="js/settings.js"></script>
+</head>
+<body>
+
+<div id="header">
+    <div id="refresh">
+        <span class="btn" onclick="refresh()">
+            <span class="glyphicon glyphicon-refresh"></span>
+        </span>
+    </div>
+    <div id="status" class="btn-group">
+        <button class="btn btn-info" id="air_code">
+            <strong>^-^</strong>
+        </button>
+        <button class="btn btn-danger" id="air_status">Offline</button>
+    </div>
+    <div style="clear: both"></div>
+</div>
+
+<div id="player">
+    <div id="drop_zone">
+        <div id="drop_zone_header">
+            Waiting connect...
+        </div>
+    </div>
+    <div id="play_zone"></div>
+</div>
+
+
+<!--<div class="footer">-->
+<!--<div class="container">-->
+<!--<span>Copyright: <a href="http://weibo.com/aiyboo">NinetyH</a> &copy; 2014.</span>-->
+<!--<span>Source: <a href="https://github.com/aiyanbo/md-ppt">https://github.com/aiyanbo/md-ppt</a></span>-->
+<!--</div>-->
+<!--</div>-->
+</body>
+
+<script>
+    var refresh = function () {
+        if (window.airPlay.isOnline()) {
+            return;
+        }
+        window.settings.set();
+    };
+
+    window.player = new Player({
+        onplay: function (event) {
+            window.airPlay.send({"type": "play", "data": event.data});
+        },
+        onreadend: function (event) {
+            var message = {};
+            message.type = "pull";
+            message.data = {
+                "type": "markdown",
+                "data": window.player.getMarkdown(),
+                "index": window.player.getIndex()
+            };
+            window.airPlay.send(message);
+        }
+    });
+    window.player.setSwipeEvent(window);
+
+    window.airPlay = new AirPlay({
+        onopen: function (event) {
+            console.log(event);
+        },
+        onpush: function (event) {
+            var message = {};
+            message.type = "pull";
+            message.data = {
+                "type": "markdown",
+                "data": window.player.getMarkdown(),
+                "index": window.player.getIndex()
+            };
+            window.airPlay.send(message);
+        },
+        onpull: function (event) {
+            window.player.sync(event.data);
+        },
+        onplay: function (event) {
+            window.player.play(event.data);
+        }
+    });
+
+    window.settings = new Settings({
+        onok: function (ws, code) {
+            window.airPlay.connect(ws, code);
+        },
+        onws: function (ws) {
+            console.log("Ignore the event in mobile.");
+        }
+    });
+
+    window.settings.set();
+</script>
+</html>

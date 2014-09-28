@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Markdown PPT Player</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/player.css">
+    <link rel="stylesheet" href="css/swtich.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.mobile.custom.min.js"></script>
+    <script src="http://jgm.github.io/stmd/js/stmd.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/air.play.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.6/ZeroClipboard.min.js"></script>
+</head>
+<body>
+<!-- Static navbar -->
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/player.html">Come Soon</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <form class="navbar-form navbar-left" onsubmit="connect();return false" role="form">
+                <div class="input-group">
+                    <span class="input-group-addon">Air Play</span>
+                    <input id="input_host" type="url" class="form-control" autocomplete>
+                </div>
+            </form>
+
+            <div class="navbar-form navbar-right" onsubmit="return false" role="status">
+                <div class="btn-group">
+                    <button class="btn btn-info" id="air_code" onclick="openShareDialog()">
+                    <strong>^-^</strong>
+                    </button>
+                    <button class="btn btn-danger" id="air_status">Offline</button>
+                    <button class="btn btn-primary glyphicon-tooltip" onclick="window.player.fullScreen('#main')">
+                        <span class="glyphicon glyphicon-fullscreen" id="glyphicon_full_screen"
+                              data-toggle="tooltip" data-placement="bottom" title="Full screen"></span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div id="main" class="panel-dashed">
+        <div id="player">
+            <div id="drop_zone" class="text-center">
+                <div id="drop_zone_header">
+                    Drop markdown file
+                </div>
+            </div>
+            <div id="play_zone"></div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="qrcode_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="qrcode_modal_label">Share</h4>
+            </div>
+            <div class="modal-body">
+                <label>Read only</label>
+
+                <div class="onoffswitch navbar-right">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch_readonly"
+                           onchange="changeShareModel()" checked>
+                    <label class="onoffswitch-label" for="switch_readonly">
+                        <span class="onoffswitch-inner">
+                            <span class="onoffswitch-active"><span class="onoffswitch-switch">ON</span></span>
+                            <span class="onoffswitch-inactive"><span class="onoffswitch-switch">OFF</span></span>
+                        </span>
+                    </label>
+                </div>
+                <div style="clear: both"></div>
+                <div class="input-group">
+                    <input id="input_share" class="form-control" readonly type="url"
+                           value="https://github.com/aiyanbo/md-ppt">
+                    <span class="input-group-addon btn" id="btn_copy"
+                          data-clipboard-text="https://github.com/aiyanbo/md-ppt">
+                        <span class="glyphicon glyphicon-camera"></span>
+                    </span>
+                </div>
+                <div id="qrcode" class="input-group">
+                    <img id="img_qrcode"
+                         src="http://api.qrserver.com/v1/create-qr-code/?data=https%3A%2F%2Fgithub.com%2Faiyanbo%2Fmd-ppt">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="container">
+        <span>Copyright: <a href="http://weibo.com/aiyboo">NinetyH</a> &copy; 2014.</span>
+        <span>Source: <a href="https://github.com/aiyanbo/md-ppt">https://github.com/aiyanbo/md-ppt</a></span>
+    </div>
+</div>
+</body>
+<script>
+    $('#glyphicon_full_screen').tooltip();
+
+    var openShareDialog = function () {
+        var readOnlySwitch = document.querySelector('#switch_readonly');
+        if (!readOnlySwitch.checked) {
+            readOnlySwitch.checked = true;
+            setShareModel({
+                "code": window.airPlay.code(),
+                "url": window.airPlay.url(),
+                readOnly: true
+            });
+        }
+        $('#qrcode_modal').modal();
+    };
+
+    var connect = function () {
+        var url = $("#input_host").val();
+        if (window.airPlay.url() == url && window.airPlay.isOnline()) {
+            return;
+        }
+        window.airPlay.connect(url);
+        window.settings.save(url);
+    };
+
+    var setShareModel = function (options) {
+        var args = "code=" + options.code + "&ws=" + options.url;
+        if (options.readOnly) {
+            args = args + "&ro=1";
+        } else {
+            args = args + "&ctrl=1";
+        }
+        var share = window.location.origin + "/player.html?" + args;
+        $("#input_share").val(share);
+        $("#btn_copy").attr("data-clipboard-text", share);
+        $("#img_qrcode").attr("src",
+                        "http://api.qrserver.com/v1/create-qr-code/?data="
+                        + encodeURIComponent(window.location.origin + "/mobile.html?" + args));
+    };
+
+    var changeShareModel = function () {
+        setShareModel({
+            "code": window.airPlay.code(),
+            "url": window.airPlay.url(),
+            readOnly: document.querySelector("#switch_readonly").checked
+        });
+    };
+
+    window.player = new Player({
+        onplay: function (event) {
+            window.airPlay.send({"type": "play", "data": event.data});
+        },
+        onreadend: function (event) {
+            var message = {};
+            message.type = "pull";
+            message.data = {
+                "type": "markdown",
+                "data": window.player.getMarkdown(),
+                "index": window.player.getIndex()
+            };
+            window.airPlay.send(message);
+        }
+    });
+    window.player.setSwipeEvent("#main");
+
+    window.airPlay = new AirPlay({
+        onopen: function (event) {
+            $("#input_host").val(event.url);
+            setShareModel({
+                "code": event.data,
+                "url": event.url,
+                readOnly: true
+            });
+        },
+        onpush: function (event) {
+            var message = {};
+            message.type = "pull";
+            message.data = {
+                "type": "markdown",
+                "data": window.player.getMarkdown(),
+                "index": window.player.getIndex()
+            };
+            window.airPlay.send(message);
+        },
+        onpull: function (event) {
+            window.player.sync(event.data);
+        },
+        onplay: function (event) {
+            window.player.play(event.data);
+        }
+    });
+
+    window.settings = new Settings({
+        onreadonly: function () {
+            window.player.readOnly();
+        },
+        onok: function (ws, code) {
+            window.airPlay.connect(ws, code);
+            $("#input_host").val(ws);
+        },
+        onws: function (ws) {
+            window.airPlay.connect(ws);
+            $("#input_host").val(ws);
+        }
+    });
+
+    window.settings.set();
+
+    var zeroClipboard = new ZeroClipboard(document.querySelector("#btn_copy"));
+    zeroClipboard.on("ready", function (readyEvent) {
+        console.log("ZeroClipboard is on ready.");
+        if (navigator.userAgent.match(/chrome/i)) {
+            var btnCopy = $("#btn_copy");
+            btnCopy.tooltip({"placement": "left", "trigger": "click hover"})
+                    .attr('data-original-title', 'Copy to clipboard');
+
+            btnCopy.on("mouseout", function (event) {
+                $("#btn_copy")
+                        .attr('data-original-title', 'Copy to clipboard')
+                        .tooltip('fixTitle');
+            }).on("click", function (event) {
+                $("#btn_copy")
+                        .attr('data-original-title', 'Copied!')
+                        .tooltip('toggle');
+            });
+        } else {
+            var bridge = $("#global-zeroclipboard-html-bridge");
+            bridge.tooltip({"placement": "top", "trigger": "click hover"})
+                    .attr('data-original-title', 'Copy to clipboard');
+
+            bridge.on("mouseout", function (event) {
+                $("#global-zeroclipboard-html-bridge")
+                        .attr('data-original-title', 'Copy to clipboard')
+                        .tooltip('fixTitle');
+            }).on("click", function (event) {
+                $("#global-zeroclipboard-html-bridge")
+                        .attr('data-original-title', 'Copied!')
+                        .tooltip('toggle');
+            });
+        }
+    });
+</script>
+</html>
