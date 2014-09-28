@@ -146,12 +146,12 @@
         } else {
             args = args + "&ctrl=1";
         }
-        var share = window.location.origin + "/player.html?" + args;
+        var share = window.location.origin + "/md-ppt/player.html?" + args;
         $("#input_share").val(share);
         $("#btn_copy").attr("data-clipboard-text", share);
         $("#img_qrcode").attr("src",
                         "http://api.qrserver.com/v1/create-qr-code/?data="
-                        + encodeURIComponent(window.location.origin + "/mobile.html?" + args));
+                        + encodeURIComponent(window.location.origin + "/md-ppt/mobile.html?" + args));
     };
 
     var changeShareModel = function () {
