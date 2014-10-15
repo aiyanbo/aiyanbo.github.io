@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="keywords" content="AiCooC AiShell Javascript"/>
+    <meta name="description" content="AiShell is a javascript shell by AiCooC"/>
+    <title>AiShell 0.0.1</title>
+    <link rel="stylesheet" href="css/shell.css">
+    <script type="text/javascript" src="js/Help.js"></script>
+    <script type="text/javascript" src="js/StringUtil.js"></script>
+    <script type="text/javascript" src="plugins/core/CoreLib.js"></script>
+    <script type="text/javascript" src="js/shellCore.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="head_container">
+        <div class="head">
+            <h1>AiShell</h1>
+
+            <h3>
+                <span id="version">0.0.1</span>
+            </h3>
+
+            <p>
+                <span>This style comes from <a href="http://www.mongodb.org/" target="_blank">mongoDB</a></span>
+            </p>
+        </div>
+    </div>
+    <div class="shell_container">
+        <div id="shell">
+            <p class="info">AiShell browser Shell version:0.0.1</p>
+
+            <p class="info">type "help" for help</p>
+
+            <p class="info">syntax "max 1,2,3,4,5"</p>
+
+            <div class="line">
+                <span>&gt;</span>
+                <input class="readLine" onkeydown="AiShell.keyPressListener(event)">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        AiShell.all();
+    </script>
+    <div id="footer">
+        <span>Copyright: <a href="http://weibo.com/aiyboo">NinetyH</a> &copy; 2010.</span>
+        <span>Source: <a href="https://github.com/aiyanbo/aishell">https://github.com/aiyanbo/aishell</a></span>
+    </div>
+</div>
+<script type="text/javascript" src="http://v1.jiathis.com/code/jiathis_r.js?btn=r4.gif&amp;uid=909909"
+        charset="utf-8"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-23232827-4']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+</body>
+</html>
