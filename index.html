@@ -45,78 +45,30 @@
 <!-- MAIN CONTENT -->
 <div id="main_content">
     <h3>Posts</h3>
-
-    <div class="surface">
-        <div class="title">动态索引创建器</div>
-        <div class="desc">动态索引创建器是指：根据收集到的用户过滤器（查询条件），分析已有的数据分布情况，
-            找到一条最佳索引路径，然后创建最佳索引；同时，回收已经过时的索引（不再是最佳路径的索引）。
-        </div>
-    </div>
-    <div class="surface">
-        <div class="title">动态索引创建器</div>
-        <div class="desc">动态索引创建器是指：根据收集到的用户过滤器（查询条件），分析已有的数据分布情况，
-            找到一条最佳索引路径，然后创建最佳索引；同时，回收已经过时的索引（不再是最佳路径的索引）。
-        </div>
-    </div>
-    <div class="surface">
-        <div class="title">动态索引创建器</div>
-        <div class="desc">动态索引创建器是指：根据收集到的用户过滤器（查询条件），分析已有的数据分布情况，
-            找到一条最佳索引路径，然后创建最佳索引；同时，回收已经过时的索引（不再是最佳路径的索引）。
-        </div>
-    </div>
-    <div class="surface">
-        <div class="title">动态索引创建器</div>
-        <div class="desc">动态索引创建器是指：根据收集到的用户过滤器（查询条件），分析已有的数据分布情况，
-            找到一条最佳索引路径，然后创建最佳索引；同时，回收已经过时的索引（不再是最佳路径的索引）。
-        </div>
-    </div>
-    <div class="surface">
-        <div class="title">动态索引创建器</div>
-        <div class="desc">动态索引创建器是指：根据收集到的用户过滤器（查询条件），分析已有的数据分布情况，
-            找到一条最佳索引路径，然后创建最佳索引；同时，回收已经过时的索引（不再是最佳路径的索引）。
-        </div>
-    </div>
-    <div class="surface">
-        <div class="title">动态索引创建器</div>
-        <div class="desc">动态索引创建器是指：根据收集到的用户过滤器（查询条件），分析已有的数据分布情况，
-            找到一条最佳索引路径，然后创建最佳索引；同时，回收已经过时的索引（不再是最佳路径的索引）。
-        </div>
-    </div>
-    <div class="surface">
-        <div class="title">动态索引创建器</div>
-        <div class="desc">动态索引创建器是指：根据收集到的用户过滤器（查询条件），分析已有的数据分布情况，
-            找到一条最佳索引路径，然后创建最佳索引；同时，回收已经过时的索引（不再是最佳路径的索引）。
-        </div>
-    </div>
-    <div class="surface">
-        <div class="title">动态索引创建器</div>
-        <div class="desc">动态索引创建器是指：根据收集到的用户过滤器（查询条件），分析已有的数据分布情况，
-            找到一条最佳索引路径，然后创建最佳索引；同时，回收已经过时的索引（不再是最佳路径的索引）。
-        </div>
-    </div>
-    <div class="surface">
-        <div class="title">动态索引创建器</div>
-        <div class="desc">动态索引创建器是指：根据收集到的用户过滤器（查询条件），分析已有的数据分布情况，
-            找到一条最佳索引路径，然后创建最佳索引；同时，回收已经过时的索引（不再是最佳路径的索引）。
-        </div>
-    </div>
-
 </div>
 <!-- FOOTER  -->
 
 </body>
+<script src="javascripts/posts.js"></script>
 <script type="text/javascript">
     onload = init;
     function init() {
-        var surfaces = document.querySelectorAll("div.surface");
-        for (var i in surfaces) {
-            if (!surfaces[i].className) {
-                break;
-            }
-            surfaces[i].className = surfaces[i].className + " surface_bg_" + (i % 10);
-            surfaces[i].onclick = function () {
-                window.location = "https://github.com/aiyanbo/sliner/wiki/Dynamic-Index-Generator";
-            }
+        var container = document.querySelector("#main_content");
+        for (var i in posts) {
+            var surface = document.createElement("div");
+            surface.className = "surface surface_bg_" + (i % 10);
+            var title = document.createElement("div");
+            title.className = "title";
+            title.innerHTML = posts[i].title;
+            var desc = document.createElement("div");
+            desc.className = "desc";
+            desc.innerHTML = posts[i].desc;
+            surface.appendChild(title);
+            surface.appendChild(desc);
+            surface.onclick = function () {
+                window.location = posts[i].link;
+            };
+            container.appendChild(surface);
         }
     }
     function easeIn(element) {
