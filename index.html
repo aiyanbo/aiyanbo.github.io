@@ -65,9 +65,8 @@
             desc.innerHTML = posts[i].desc;
             surface.appendChild(title);
             surface.appendChild(desc);
-            surface.onclick = function () {
-                window.location = posts[i].link;
-            };
+            surface.link = posts[i].link;
+            surface.onclick = openLink;
             container.appendChild(surface);
         }
     }
@@ -78,6 +77,9 @@
         }
         active.className = active.className.replace("nav_item_active", "nav_item");
         element.className = element.className.replace("nav_item", "nav_item_active");
+    }
+    function openLink() {
+        window.location = event.currentTarget.link;
     }
 </script>
 </html>
