@@ -1,5 +1,10 @@
 var posts = [
     {
+        title: "Spark run start-all.sh using password-less ssh",
+        desc: "Spark 提供了独立版本的(不依赖任何其他工具)的集群方式，我们可以通过 start-all.sh 来启动一个 Spark 集群。 ...more",
+        link: "https://zybuluo.com/yanbo-ai/note/43894"
+    },
+    {
         title: "Spark 常规故障处理: Too many open files",
         desc: "当你在 Linux 系统上使用 SparkContext.textFile 加载本地文件系统(文件目录)的数据时，可能会遇到下面的错误 ...more",
         link: "https://zybuluo.com/yanbo-ai/note/43455"
