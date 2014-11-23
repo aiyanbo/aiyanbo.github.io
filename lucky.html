@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Lucky | NinetyH</title>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<style type="text/css">
+		body {
+			padding-top: 70px;
+		}
+
+		code {
+			margin-left: 10px;
+			font-size: 24px; 
+			font-weight: bolder;
+		}
+
+		.slide {
+			border-radius: 5px;
+			background-color: #eee;
+		}
+
+		#main {
+			width: 100%;
+		}
+
+		#player {
+			font-size: 120px; 
+			color: #c7254e;
+			padding-top: 120px;
+			min-height: 600px;
+		}
+
+		#display {
+			min-height: 500px;
+		}
+
+		#qr-code {
+			height: 100px
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Lucky</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<form class="navbar-form navbar-left" onsubmit="initNumberRanges();return false" role="form">
+					<div class="input-group">
+						<span class="input-group-addon">Range</span>
+						<input id="input_range" type="number" value="250" class="form-control" autocomplete>
+					</div>
+				</form>
+				<div class="navbar-form navbar-right" role="status">
+					<div class="btn-group">
+						<button class="btn btn-danger" id="btn-play" onclick="play()">Start</button>
+						<button class="btn btn-default glyphicon-tooltip" onclick="">
+							<span class="glyphicon glyphicon-fullscreen" id="glyphicon_full_screen"
+							data-toggle="tooltip" data-placement="left" title="Full screen"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div id="main" class="jumbotron">
+			<div class="row">
+				<div class="col-md-6">
+					<div id="player" class="text-center"></div>
+				</div>
+				<div class="row col-md-6">
+					<div class="col-md-12">
+						<div id="display" class=""></div>
+					</div>
+					<div class="col-md-10"></div>
+					<div class="col-md-2">
+						<div class="text-center">
+							<img id="qr-code" src="http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=FFFFFF&amp;data=http%3A%2F%2Fweibo.com%2Faiyboo&amp;qzone=1&amp;margin=0&amp;size=400x400&amp;ecc=L" alt="qr code" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script>
+		var range = 250;
+		var luckGuys = [];
+		var timer = null;
+		var starting = false;
+		var player = document.querySelector("#player");
+		var display = document.querySelector("#display");
+
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+
+		function initNumberRanges(){
+			var inputRange = document.querySelector("#input_range");
+			range = parseInt(inputRange.value);
+			luckies = [];
+		}
+
+		function getRandomInt(max){
+			return  Math.floor(Math.random() * max) + 1;
+		}
+
+		function play(){
+			var btn = document.querySelector("#btn-play");
+			if(!starting){
+				starting = true;
+				btn.innerHTML = "Stop";
+				timer = setInterval('run()', 1);
+			}else {
+				clearInterval(timer);
+				starting = false;
+				btn.innerHTML = "Start";
+				luckGuys.push(parseInt(player.innerHTML));
+				displayNumbers(luckGuys);
+			}
+			
+		}
+
+		function run(){
+			var num = null;
+			while(true){
+				num = getRandomInt(range);
+				if(luckGuys.length == 0){
+					break;
+				}else {
+					var exits = false;
+					for(var i in luckGuys){
+						if(luckGuys[i] == num){
+							exits = true;
+						}
+					}
+					if(!exits){
+						break;
+					}
+				}
+			}
+			player.innerHTML = num;
+		}
+
+		function displayNumbers(numbers){
+			var content = "";
+			for(var i in numbers){
+				content = content + "<code>" + numbers[i] + "</code>";
+				if(i > 0 && i % 5 == 0){
+					content = content + "<br />";
+				}
+			}
+			display.innerHTML = content;
+		}
+	</script>
+</body>
+</html>
