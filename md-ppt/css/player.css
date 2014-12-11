@@ -73,10 +73,10 @@
     font-size: 1.5em;
 }
 
-.footer {
-    margin-top: 5px;
+#play_zone img {
+    max-width:100%;
 }
 
-img {
-    max-width:100%;
+.footer {
+    margin-top: 5px;
 }
