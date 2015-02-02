@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Heart</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Sweet Heart">
+    <meta name="keywords" content="Sweet Heart AiCooC">
+    <style type="text/css">
+        #heart {
+            position: relative;
+            right: 300px;
+            width: 100px;
+            height: 90px;
+            margin: 40px auto;
+        }
+
+        #heart:before,
+        #heart:after {
+            position: absolute;
+            content: "";
+            left: 350px;
+            top: 0;
+            width: 350px;
+            height: 560px;
+            background: red;
+            -moz-border-radius: 350px 350px 0 0;
+            border-radius: 350px 350px 0 0;
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            -webkit-transform-origin: 0 100%;
+            -moz-transform-origin: 0 100%;
+            -ms-transform-origin: 0 100%;
+            -o-transform-origin: 0 100%;
+            transform-origin: 0 100%;
+        }
+
+        #heart:after {
+            left: 0;
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+            -webkit-transform-origin: 100% 100%;
+            -moz-transform-origin: 100% 100%;
+            -ms-transform-origin: 100% 100%;
+            -o-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
+        }
+
+        #description {
+            position: relative;
+            z-index: 1;
+            font-family: "Microsoft Yahei";
+            font-size: 520%;
+            text-align: center;
+            font-weight: bolder;
+        }
+        #love_date {
+            position: relative;
+            z-index: 1;
+            font-family: "Microsoft Yahei";
+            font-size: 299%;
+            text-align: center;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+<div id="heart"></div>
+<div id="description"></div>
+<div id="love_date"></div>
+</body>
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-23232827-4']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+</html>
