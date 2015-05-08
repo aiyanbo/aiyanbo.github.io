@@ -10,6 +10,11 @@ var posts = [
         link: "https://zybuluo.com/yanbo-ai/note/43455"
     },
     {
+        title: "Spark 编程指南简体中文版",
+        desc: "官方 Spark 编程指南简体中文翻译版本",
+        link: "https://github.com/aiyanbo/spark-programming-guide-zh-cn"
+    },
+    {
         title: "Databricks Spark Knowledge Base 简体中文",
         desc: "翻译自 Databricks Spark Knowledge Base ...more",
         link: "http://aiyanbo.gitbooks.io/databricks-spark-knowledge-base-zh-cn/"
