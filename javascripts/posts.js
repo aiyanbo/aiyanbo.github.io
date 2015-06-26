@@ -2,7 +2,7 @@ var posts = [
     {
         title: "在 Docker 上运行一个 RESTful 风格的微服务",
         desc: "Docker, RESTful, Microservice 的结合",
-        link: "https://zybuluo.com/yanbo-ai/note/119422"
+        link: "http://segmentfault.com/a/1190000002930500"
     },
     {
         title: "Spark run start-all.sh using password-less ssh",
