@@ -1,5 +1,10 @@
 var posts = [
     {
+        title: "将运行在 Docker 上的微服务注册到服务中心",
+        desc: "在 Docker 上使用 etcd 作为微服务的服务中心，用来做服务注册与服务发现",
+        link: "http://segmentfault.com/a/1190000002943994"
+    },
+    {
         title: "在 Docker 上运行一个 RESTful 风格的微服务",
         desc: "Docker, RESTful, Microservice 的结合",
         link: "http://segmentfault.com/a/1190000002930500"
