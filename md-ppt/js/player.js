@@ -165,8 +165,8 @@ function Player(options) {
         }
     };
 
-    player.addEventListener('dragover', handleDragOver, false);
-    player.addEventListener('drop', handleFileSelect, false);
+    window.addEventListener('dragover', handleDragOver, false);
+    window.addEventListener('drop', handleFileSelect, false);
 
     window.addEventListener('keyup', handleKeyUp, false);
 
