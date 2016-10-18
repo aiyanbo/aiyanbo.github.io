@@ -1,5 +1,10 @@
 var posts = [
     {
+        title: "利用 Lua 的函数式编程简化 lua-resty-redis 的使用",
+        desc: "利用 Lua 的函数式编程二次封装 lua-resty-redis, 简化使用过程",
+        link: "https://segmentfault.com/a/1190000007207616"
+    },
+    {
         title: "高频交易 - 来自华尔街的捕猎",
         desc: "这是一场速度的战争。在股票交易中，分成 2 类人：一类是 “有速度” 的，另一类是 “没速度”的。“有速度”的那类人为了几纳秒而大笔投资，而“没速度”的人对几纳秒的价值毫无概念。",
         link: "http://www.jianshu.com/p/8d5f6e8e4e12"
