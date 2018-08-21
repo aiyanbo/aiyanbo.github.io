@@ -28,7 +28,7 @@ CoreLib.eval = function(statement) {
 };
 
 CoreLib.heart = function() {
-    window.open("http://www.aicooc.com/heart/heart.html");
+    window.open("/heart.html");
 };
 
 CoreLib.help = function() {
