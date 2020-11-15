@@ -1,5 +1,10 @@
 var posts = [
     {
+        title: "GrowingIO 微服务 SaaS 与私有部署运行实践",
+        desc: "基于 JVM 类加载技术实现 SaaS 与私有部署运行环境的构建",
+        link: "https://xie.infoq.cn/article/f2fe62b274e9edf985ecc221b"
+    },
+    {
         title: "利用 Lua 的函数式编程简化 lua-resty-redis 的使用",
         desc: "利用 Lua 的函数式编程二次封装 lua-resty-redis, 简化使用过程",
         link: "https://segmentfault.com/a/1190000007207616"
